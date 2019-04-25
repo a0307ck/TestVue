@@ -6,9 +6,13 @@ import router from './router'
 import VueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.config.productionTip = false
 Vue.use(VueResource)
-
+Vue.use(Element, { size: 'small', zIndex: 3000 })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
