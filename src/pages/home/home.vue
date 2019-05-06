@@ -12,9 +12,11 @@
                 </router-link>
                 </div>
                 <div class="spans">&nbsp;</div>
-                <div class="cols">
-                    <img width="180px" height="300px" src="http://imao123.com/api/imao/20181109172830qM35s.jpg">
-                </div>
+                <router-link to="/movie/list">
+                  <div class="cols">
+                      <img width="180px" height="300px" src="http://imao123.com/api/imao/20181109172830qM35s.jpg">
+                  </div>
+                </router-link>
                 <div class="spans">&nbsp;</div>
                 <div class="cols">
                     <img width="180px" height="300px" src="http://imao123.com/api/imao/20181109172830qM35s.jpg">

@@ -7,7 +7,8 @@
                         <div class="grid images_3_of_2">
                         	<div class="movie_image">
                                 <span class="movie_rating">5.0</span>
-                                <img src="../images/single.jpg" class="img-responsive" alt=""/>
+								
+                                <img src="../images/single.jpg"   class="img-responsive" alt=""/>
                             </div>
                             <div class="movie_rate">
                             	<div class="rating_desc"><p>Your Vote :</p></div>
@@ -40,7 +41,11 @@
                         	<p class="movie_option"><strong>Director: </strong><a href="#">suffered </a></p>
                         	<p class="movie_option"><strong>Actors: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered</a>, <a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>
                             <p class="movie_option"><strong>Age restriction: </strong>13</p> 
-                            <div class="down_btn"><a class="btn1" href="#"><span> </span>Download</a></div>
+                            	<div class="down_btn">
+									<router-link to="/book/view">
+									<a class="btn1" href="#"><span> </span>在线观看</a>
+									</router-link>
+								</div>
                          </div>
                         <div class="clearfix"> </div>
                         <p class="m_4">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
@@ -150,6 +155,17 @@
     </div>
 </div>
 </template>
+<script>
+export default {
+	name:"productDetail",
+	data(){
+		return{
+			movieUrl:'',
+			movieTitle:''
+		}
+	}
+}
+</script>
 
 <style scoped>
 @import "style.css";
