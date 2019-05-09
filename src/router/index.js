@@ -5,7 +5,7 @@ import BookAdmin from '@/components/BookAdmin'
 import BookList from '@/components/BookList'
 import productDetail from '@/pages/product/productDetail'
 import productList from '@/pages/product/productList'
-import productView from '@/pages/product/productView'
+import playMovie from '@/pages/product/playMovie'
 import test from '@/pages/product/testlist'
 import Home from '@/pages/home/home'
 Vue.use(Router)
@@ -15,7 +15,12 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: test
+    },
+    {
+      path: '/Home',
+      name: 'Home',
+      component: test
     },
     {
       path: '/book/add',
@@ -25,7 +30,7 @@ export default new Router({
     {
       path: '/book/list',
       name: 'BookList',
-      component: BookList
+      component: test
     },
     {
       path: '/book/detail',
@@ -34,8 +39,8 @@ export default new Router({
     },
     {
       path: '/book/view',
-      name: 'productView',
-      component: productView
+      name: 'playMovie',
+      component: playMovie
     },
     {
       path: '/movie/list',

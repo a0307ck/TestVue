@@ -34,9 +34,9 @@
                             </div>
                         </div>
                         <div class="desc1 span_3_of_2">
+							<p class="movie_option"><strong>title: </strong>{{movieTitle}}</p>
                         	<p class="movie_option"><strong>Country: </strong><a href="#">established</a>, <a href="#">USA</a></p>
                         	<p class="movie_option"><strong>Year: </strong>2014</p>
-                        	<p class="movie_option"><strong>Category: </strong><a href="#">Adventure</a>, <a href="#">Fantazy</a></p>
                         	<p class="movie_option"><strong>Release date: </strong>December 12, 2014</p>
                         	<p class="movie_option"><strong>Director: </strong><a href="#">suffered </a></p>
                         	<p class="movie_option"><strong>Actors: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered</a>, <a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>
@@ -49,7 +49,21 @@
                          </div>
                         <div class="clearfix"> </div>
                         <p class="m_4">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-		                
+						
+						<div class="desc1 span_3">
+							<template v-for="(site,id) in movieData">
+							<p class="movie_option">{{site.moviePlayType}}</p>
+							<div class="btn-group">
+								<div class="divLeft"  v-for="(st,id) in site.moviePlayNum">
+									<!--
+									<router-link :to="{path: '/book/view', query: {purl:st.moviePlayNumUrl,title:site.movieTitle,pt:st.moviePlayNumName}}"> 
+									</router-link>
+									-->
+									<button type="button" class="btn btn-default" @click="tolink(st.moviePlayNumUrl,movieTitle,st.moviePlayNumName)">{{st.moviePlayNumName}}</button>
+								</div>
+							</div>
+							</template>
+						</div>
                       </div>
                       <div class="col-md-3">
                       	<div class="movie_img"><div class="grid_2">
@@ -97,8 +111,10 @@ export default {
 	name:"productDetail",
 	data(){
 		return{
-			movieUrl:'',
-			movieTitle:'',
+			moviePic:"",
+			movieTitle:this.$route.query.title,
+			typeId:this.$route.query.tid,
+			videoId:this.$route.query.vid,
 			movieData:[
 				{
 					moviePlayType:"",
@@ -116,13 +132,27 @@ export default {
 		this.loadData();
 	},
 	methods:{
+		tolink(purl1,title1,pt1){
+			let dt ={};	
+			dt.purl = purl1;
+			dt.pt = pt1;
+			dt.title =title1;
+			console.log(dt);
+			this.$router.push({name:'playMovie',params:dt})
+		},
 		loadData(){
+			var str = {'vId':this.videoId,'tid':this.typeId};
+			console.log(str)
 			this.$axios({
-            method:'get',
-            url:'/api/movie',
-            data:{}
+				method:'post',
+            	url:'http://localhost:8088/movie/play/data/selectOne',
+				headers: {
+					'Content-type': 'application/json;charset=UTF-8'
+				},
+				data:JSON.stringify(str)
 			}).then((response) =>{          //这里使用了ES6的语法
-				var md = response.data.movieData.split("$$");
+				 var body1 = response.data.data.body;
+				var md = body1.split("$$");
 				let data = [];
 				md.forEach((element,index) => {
 					let map  = {};
@@ -174,4 +204,10 @@ export default {
 
 <style scoped>
 @import "style.css";
+</style>
+<style>
+.divLeft{
+	float: left;
+	margin: 0 10px;
+}
 </style>

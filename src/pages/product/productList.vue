@@ -55,5 +55,5 @@ export default {
 }
 </script>
 <style scoped>
- @import "http://www.bootcss.com/p/layoutit/css/bootstrap-combined.min.css";
+ /*@import "http://www.bootcss.com/p/layoutit/css/bootstrap-combined.min.css"; */
 </style>
