@@ -30,7 +30,7 @@
       </div>
     </nav>
     <div class="container">
-      <div class="col-sm-12">
+      <div class="col-sm-20">
         <router-view></router-view>
       </div>
     </div>

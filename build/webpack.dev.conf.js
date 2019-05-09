@@ -93,3 +93,16 @@ module.exports = new Promise((resolve, reject) => {
     }
   })
 })
+
+// 这里是json-server配置信息  
+// json-server.js  
+const jsonServer = require('json-server')  
+const apiServer = jsonServer.create()  
+const apiRouter = jsonServer.router('db.json') //数据关联server，db.json与index.html同级  
+const middlewares = jsonServer.defaults()  
+  
+apiServer.use(middlewares)  
+apiServer.use('/api',apiRouter)  
+apiServer.listen(3000, () => {                 //监听端口  
+  console.log('JSON Server is running')  
+})  

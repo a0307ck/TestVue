@@ -13,9 +13,6 @@
                                     {{site.vName}}
                                 </h3>
                                 <p>
-                                    改进型的哈佛结构具有一条独立的地址总线和一条独立的数据总线，两条总线由程序存储器和数据存储器分时复用，使结构更紧凑。
-                                </p>
-                                <p>
                                     <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
                                 </p>
                             </div>
@@ -58,5 +55,5 @@ export default {
 }
 </script>
 <style scoped>
-/* @import "http://www.bootcss.com/p/layoutit/css/bootstrap-combined.min.css"; */
+ @import "http://www.bootcss.com/p/layoutit/css/bootstrap-combined.min.css";
 </style>

@@ -5,7 +5,8 @@ import BookAdmin from '@/components/BookAdmin'
 import BookList from '@/components/BookList'
 import productDetail from '@/pages/product/productDetail'
 import productList from '@/pages/product/productList'
-import view from '@/pages/product/view'
+import productView from '@/pages/product/productView'
+import test from '@/pages/product/testlist'
 import Home from '@/pages/home/home'
 Vue.use(Router)
 
@@ -33,13 +34,18 @@ export default new Router({
     },
     {
       path: '/book/view',
-      name: 'view',
-      component: view
+      name: 'productView',
+      component: productView
     },
     {
       path: '/movie/list',
       name: 'productList',
       component: productList
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     }
   ]
 })

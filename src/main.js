@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import axios from 'axios'
 import qs from 'qs'
+import VResource from 'vue-resource' 
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -15,6 +16,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Element, { size: 'small', zIndex: 3000 })
+Vue.use( VResource )
 
 Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios
 Vue.prototype.qs = qs    
