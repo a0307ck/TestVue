@@ -8,7 +8,7 @@
                         	<div class="movie_image">
                                 <span class="movie_rating">5.0</span>
 								
-                                <img src="../images/single.jpg"   class="img-responsive" alt=""/>
+                                <img :src="moviePic"   class="img-responsive" alt=""/>
                             </div>
                             <div class="movie_rate">
                             	<div class="rating_desc"><p>Your Vote :</p></div>
@@ -39,7 +39,7 @@
                         	<p class="movie_option"><strong>Year: </strong>2014</p>
                         	<p class="movie_option"><strong>Release date: </strong>December 12, 2014</p>
                         	<p class="movie_option"><strong>Director: </strong><a href="#">suffered </a></p>
-                        	<p class="movie_option"><strong>Actors: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered</a>, <a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>
+                        	<p class="movie_option"><strong>Actors: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered></a>, <a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>
                             <p class="movie_option"><strong>Age restriction: </strong>13</p> 
                             	<div class="down_btn">
 									<router-link to="/book/view">
@@ -50,19 +50,17 @@
                         <div class="clearfix"> </div>
                         <p class="m_4">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
 						
+						
 						<div class="desc1 span_3">
-							<template v-for="(site,id) in movieData">
-							<p class="movie_option">{{site.moviePlayType}}</p>
-							<div class="btn-group">
-								<div class="divLeft"  v-for="(st,id) in site.moviePlayNum">
-									<!--
-									<router-link :to="{path: '/book/view', query: {purl:st.moviePlayNumUrl,title:site.movieTitle,pt:st.moviePlayNumName}}"> 
-									</router-link>
-									-->
-									<button type="button" class="btn btn-default" @click="tolink(st.moviePlayNumUrl,movieTitle,st.moviePlayNumName)">{{st.moviePlayNumName}}</button>
+							<div v-for="(site,id) in movieData" :key="id">
+								<p class="movie_option" >{{site.moviePlayType}}</p>
+								<div class="btn-group" >
+									<div class="divLeft"  v-for="(st,id2) in site.moviePlayNum" :key="id2">
+										
+										<button type="button"  class="btn btn-default" @click="tolink(st.moviePlayNumUrl,movieTitle,st.moviePlayNumName)">{{st.moviePlayNumName}}</button>
+									</div>
 								</div>
 							</div>
-							</template>
 						</div>
                       </div>
                       <div class="col-md-3">
@@ -112,9 +110,9 @@ export default {
 	data(){
 		return{
 			moviePic:"",
-			movieTitle:this.$route.query.title,
-			typeId:this.$route.query.tid,
-			videoId:this.$route.query.vid,
+			movieTitle:this.$route.params.title,
+			typeId:this.$route.params.tid,
+			videoId:this.$route.params.vid,
 			movieData:[
 				{
 					moviePlayType:"",
@@ -145,13 +143,14 @@ export default {
 			console.log(str)
 			this.$axios({
 				method:'post',
-            	url:'http://localhost:8088/movie/play/data/selectOne',
+            	url:'http://localhost:8088/movie/data/selectOne',
 				headers: {
 					'Content-type': 'application/json;charset=UTF-8'
 				},
 				data:JSON.stringify(str)
 			}).then((response) =>{          //这里使用了ES6的语法
 				 var body1 = response.data.data.body;
+				this.moviePic = response.data.data.vPic;
 				var md = body1.split("$$");
 				let data = [];
 				md.forEach((element,index) => {

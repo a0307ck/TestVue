@@ -11,17 +11,15 @@
                 </div>
             </div>
         </li>
-        <template v-for="(site,id) in movieDetailList">
-                <li data-v-b7b8db26="" class="li-work" >
-            <router-link :to="{path: '/book/detail', query: {tid:site.tid,vid:site.vId,title:site.vName}}"> 
-                    <div data-v-b7b8db26="" class="item">
+        <template v-for="(site,id2) in movieDetailList">
+                <li data-v-b7b8db26="" class="li-work" :key="id2" >
+                    <div data-v-b7b8db26="" class="item" @click="tolink(site.movieTid,site.movieVid,site.movieTitle)">
                         <div data-v-b7b8db26="" class="cover">
-                        <a data-v-b7b8db26="" href="#" class="pic" lazy-progressive="true" lazy="loaded" 
-                        style="background-image: url(https://ycg-1251509803.image.myqcloud.com/upload/cover/cover-64835b75-ec1d-4482-97a3-bbc11476826a.jpeg?imageView2/2/w/240);">
+                        <a data-v-b7b8db26="" href="#" class="pic" lazy-progressive="true" lazy="loaded" :style="site.movieUrl">
                         </a><!----><!---->
                         </div>
                         <div data-v-b7b8db26="" class="info">
-                            <a data-v-b7b8db26="" href="#" class="title"> {{site.vName}}</a>
+                            <a data-v-b7b8db26="" href="#" class="title"> {{site.movieTitle}}</a>
                             <div data-v-b7b8db26="" class="data">
                                 <span data-v-b7b8db26="" class="likes-num">
                                     <div data-v-b7b8db26="" class="VueStar">
@@ -46,7 +44,6 @@
                             </a>
                         </div>
                     </div>
-            </router-link>
                 </li>
         </template>
     </ul>
@@ -58,7 +55,16 @@ export default {
     name:"test",
     data(){
         return{
-             "movieDetailList":[]
+             "movieDetailList":[
+                {
+                    movieTitle:"",
+                    movieUrl:"",
+                    movieTid:"",
+                    movieVid:"",
+                    moviePic:""
+                }
+             ]
+
         }
     },
     created(){
@@ -67,20 +73,37 @@ export default {
             url:'http://localhost:8088/movie/data/list',
             data:this.qs.stringify({    //这里是发送给后台的数据
                     page:1,
-                    size:10,
+                    size:17,
             })
         }).then((response) =>{          //这里使用了ES6的语法
             //console.log(response)       //请求成功返回的数据
-            this.movieDetailList = response.data.data.list;
+            //this.movieDetailList = response.data.data.list;
+            let dateList = response.data.data.list;
+
+            dateList.forEach(data => {
+                //tid:site.tid,vid:site.vId
+                let mp ={};
+                mp.movieTitle = data.vName;
+                mp.movieTid = data.tid;
+                mp.movieVid = data.vId;
+                mp.moviePic = data.vPic;
+                mp.movieUrl = "background-image: url("+data.vPic+")";
+                this.movieDetailList.push(mp);
+            });
+            console.log(this.movieDetailList)
         }).catch((error) =>{
             console.log(error)       //请求失败返回的数据
         })
     },
     methods:{
-        toLink(vName){
-            console.log(vName);
-            //{path:'/book/view',query:{ tid:site.tid,vid:site.vId,title:site.vName,vnum:0}}"
-        }
+        tolink(tid,vid,title){
+			let dt ={};	
+			dt.tid = tid;
+			dt.vid = vid;
+			dt.title =title;
+			console.log(dt);
+			this.$router.push({name:'productDetail',params:dt})
+		}
     }
 }
 </script>
